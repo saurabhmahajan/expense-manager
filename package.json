@@ -1,0 +1,25 @@
+{
+  "name": "expense-manager",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "webpack": "webpack",
+    "dev": "webpack-dev-server"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saurabhmahajan/expense-manager.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/saurabhmahajan/expense-manager/issues"
+  },
+  "homepage": "https://github.com/saurabhmahajan/expense-manager#readme",
+  "devDependencies": {
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.9.1"
+  }
+}
