@@ -1,4 +1,5 @@
-import MessagingService from './messaging-service';
-
-const messagingService = new MessagingService();
-console.log(messagingService.showMessage('Saurabh'));
+export class App{
+    constructor(){
+        this.message = "Welcome to aurelia!";
+    }
+}
