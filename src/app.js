@@ -1,5 +1,9 @@
+import 'bulma/css/bulma.css';
+import MessagingService from "./messaging-service";
+
 export class App{
     constructor(){
-        this.message = "Welcome to aurelia!";
+        const messagingService  = new MessagingService();
+        this.message = messagingService.showMessage("Aurelia !!");
     }
 }

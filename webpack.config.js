@@ -11,7 +11,7 @@ module.exports = {
     
     resolve: {
         extensions: [".js"],
-        modules: ["src", "node_modules"].map(x => path.resolve(x)),
+        modules: ["src", "node_modules"],
       },
 
     module: {
@@ -24,6 +24,10 @@ module.exports = {
             {
                 test: /\.html$/,
                 use: 'html-loader'
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"]
             }
         ]
     },
