@@ -3,6 +3,21 @@
         <h3 class="title">${moduleName}</h3>
         <div class="columns">
             <div class="column is-offset-one-quarter">
+                <div class="control">
+                    <input type="text" value.bind="category.name" class="input" placeholder="Name">
+                </div>                                
+            </div>
+            <div class="column">
+                <div class="control">
+                    <input type="text" value.bind="category.description" class="input" placeholder="Description">
+                </div>
+            </div>
+            <div class="column">
+                <button click.trigger="addCategory()" class="button is-primary">Add</button>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-offset-one-quarter">
                 <table class="table is-fullwidth">
                     <thead>
                         <tr>
