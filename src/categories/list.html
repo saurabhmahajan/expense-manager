@@ -1,5 +1,28 @@
 <template>
     <section class="container">
-        ${moduleName}
+        <h3 class="title">${moduleName}</h3>
+        <div class="columns">
+            <div class="column is-offset-one-quarter">
+                <table class="table is-fullwidth">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Description</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr repeat.for="category of categories">
+                            <td>${category.name}</td>
+                            <td>${category.description}</td>
+                            <td>
+                                <a href="#" class="button is-info">Edit</a>
+                                <a href="#" class="button is-danger">Delete</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </section>
 </template>

@@ -1,0 +1,7 @@
+[
+    {"id" : 1, "name": "Entertainment", "description": "Expenses made on movies, games etc."},
+    {"id" : 1, "name": "Dining", "description": "Expenses made on food"},
+    {"id" : 1, "name": "Cloths", "description": "Expenses made on cloths"},
+    {"id" : 1, "name": "Telephone expenses", "description": "Expenses made on landline, mobile bill etc."},
+    {"id" : 1, "name": "Fuel", "description": "Expenses made on fule"}
+]
