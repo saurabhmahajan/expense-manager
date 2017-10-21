@@ -1,4 +1,5 @@
-﻿using ExpenseManager.Sql;
+﻿using ExpenseManager.Core;
+using ExpenseManager.Sql;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,10 @@ namespace ExpenseManger.Api
                         .AllowAnyHeader()
                         .AllowCredentials());
             });
+
             services.AddMvc();
+
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

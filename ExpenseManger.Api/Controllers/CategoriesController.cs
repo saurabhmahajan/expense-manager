@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using ExpenseManager.Core;
 using ExpenseManger.Api.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,36 +9,39 @@ namespace ExpenseManger.Api.Controllers
     [Route("api/[controller]")]
     public class CategoriesController : Controller
     {
-        static List<Category> _categories = new List<Category>();
+        private readonly ICategoryRepository _categoryRepository;
 
-        public CategoriesController()
+        public CategoriesController(ICategoryRepository categoryRepository)
         {
-            _categories = new List<Category>
-            {
-               new Category {Id = 1, Name = "Entertainment", Description = "Expenses made on movies, games etc."},
-               new Category {Id = 2, Name = "Dining", Description = "Expenses made on food"},
-               new Category {Id = 3, Name = "Cloths", Description = "Expenses made on cloths"},
-               new Category {Id = 4, Name = "Telephone expenses", Description = "Expenses made on landline, mobile bill etc."},
-               new Category {Id = 5, Name = "Fuel", Description = "Expenses made on fule"}
-            };
+            _categoryRepository = categoryRepository;
         }
 
-        public IEnumerable<Category> Get()
+        public CategoryListViewModel Get()
         {
-            return _categories;
+            List<Category> categories = _categoryRepository.GetAll().ToList();
+            return new CategoryListViewModel(categories);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody]Category category)
+        public IActionResult Post([FromBody]CategoryViewModel categoryViewModel)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                int lastId = _categories.Max(c => c.Id);
-                category.Id = lastId + 1;
-                _categories.Add(category);
+                return new BadRequestObjectResult(ModelState);
             }
 
-            return Created("Get", category);
+            Category category = MapToCategory(categoryViewModel);
+            _categoryRepository.Create(category);
+            return Created("Get", categoryViewModel);
+        }
+
+        private Category MapToCategory(CategoryViewModel categoryViewModel)
+        {
+            return new Category
+            {
+                Name = categoryViewModel.Name,
+                Description = categoryViewModel.Description
+            };
         }
     }
 }

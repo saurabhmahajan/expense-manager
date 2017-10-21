@@ -9,7 +9,7 @@ export class List{
     }
 
     activate(){
-        return this.categoryService.getCategories().then(categories => {
+        return this.categoryService.getAll().then(categories => {
             this.categories = categories;
         });
     }

@@ -8,9 +8,9 @@ export default class CategoryService {
         this.baseUrl = "http://localhost:16809/api"
     }
 
-    getCategories(){
+    getAll(){
        return this.httpClient.fetch(`${this.baseUrl}/categories`)
-            .then(response => response.json())
+            .then(response => response.categories.json())
             .then(categories => categories);
     }
 
