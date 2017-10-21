@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
+using ExpenseManager.Sql;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace ExpenseManger.Api
@@ -14,7 +11,23 @@ namespace ExpenseManger.Api
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            IWebHost webHost = BuildWebHost(args);
+
+            using (var scope = webHost.Services.CreateScope())
+            {
+                try
+                {
+                    var dbContext = scope.ServiceProvider.GetService<ExpenseManagerDbContext>();
+                    DbSeeder.Seed(dbContext);
+                }
+                catch (Exception e)
+                {
+                    ILogger<Program> logger = scope.ServiceProvider.GetService<ILogger<Program>>();
+                    logger.LogError(e, "An error occured while seeding database.");
+                }
+            }
+
+            webHost.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
