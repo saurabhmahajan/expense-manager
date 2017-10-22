@@ -1,5 +1,3 @@
-import 'bulma/css/bulma.css';
-
 export class App{
     constructor(){
         this.title = "Expense Manager";
