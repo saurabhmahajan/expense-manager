@@ -4,27 +4,23 @@ import {HttpClient} from 'aurelia-fetch-client';
 @inject(HttpClient)
 export default class CategoryService {
     constructor(httpClient){
-        this.httpClient = httpClient;
-        this.baseUrl = "http://localhost:16809/api"
+        this.httpClient = httpClient;  
+              
     }
 
     getAll(){
-       return this.httpClient.fetch(`${this.baseUrl}/categories`)
-            .then(response => response.categories.json())
-            .then(categories => categories);
+       return this.httpClient.fetch("categories")
+            .then(response => response.categories)
+            .catch(error => console.log(error));
     }
 
     add(category){
-        return this.httpClient.fetch(`${this.baseUrl}/categories`, {
+        return this.httpClient.fetch("categories", {
             method: 'POST',
             body: JSON.stringify(category),
             headers: {
                 'Content-Type': 'application/json'
             }
-        })
-        .then(response => response.json())
-        .catch(error => {
-            return error.message;
         });
     }
 }

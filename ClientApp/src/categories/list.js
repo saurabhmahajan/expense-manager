@@ -6,6 +6,10 @@ export class List{
     constructor(categoryService){
         this.categoryService = categoryService;
         this.moduleName = "Categories";
+        this.category = {
+            name: '',
+            description: ''
+        }
     }
 
     activate(){
@@ -18,8 +22,7 @@ export class List{
         return this.categoryService.add(this.category)
         .then(category => {
             this.categories.push(category);
-        }).catch(error => {
-            console.log(error);
-        });
+        })
+        .catch(error => console.log(error));
     }
 }
