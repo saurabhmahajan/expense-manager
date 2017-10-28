@@ -1,14 +1,19 @@
 <template>
     <section class="container">
+        <ul if.bind="controller.errors">
+            <li repeat.for="error of controller.errors">
+                ${error.message}
+            </li>
+        </ul>
         <div class="columns">
             <div class="column is-offset-one-quarter">
                 <div class="control">
-                    <input type="text" value.bind="category.name" class="input" placeholder="Name">
-                </div>                                
+                    <input type="text" value.bind="category.name & validate" class="input" placeholder="Name">
+                </div>
             </div>
             <div class="column">
                 <div class="control">
-                    <input type="text" value.bind="category.description" class="input" placeholder="Description">
+                    <input type="text" value.bind="category.description & validate" class="input" placeholder="Description">
                 </div>
             </div>
             <div class="column">
@@ -31,7 +36,8 @@
                             <td>${category.description}</td>
                             <td>
                                 <a href="#" class="button is-info">Edit</a>
-                                <a href="#" class="button is-danger"><i class="fa fa-remove"></i> Delete</a>
+                                <a href="#" class="button is-danger">
+                                    <i class="fa fa-remove"></i> Delete</a>
                             </td>
                         </tr>
                     </tbody>

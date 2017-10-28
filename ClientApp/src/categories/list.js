@@ -1,15 +1,20 @@
 import {inject} from 'aurelia-framework';
+import {ValidationControllerFactory, ValidationRules } from 'aurelia-validation';
 import CategoryService from '../services/category-service';
 
-@inject(CategoryService)
+@inject(CategoryService, ValidationControllerFactory)
 export class List{
-    constructor(categoryService){
+    constructor(categoryService, validationControllerFactory){
         this.categoryService = categoryService;
-        this.moduleName = "Categories";
+        this.controller = validationControllerFactory.createForCurrentScope();
         this.category = {
             name: '',
             description: ''
         }
+
+        ValidationRules
+            .ensure('name').required()
+            .on(this.category);
     }
 
     activate(){
